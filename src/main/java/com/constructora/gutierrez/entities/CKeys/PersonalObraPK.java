@@ -1,0 +1,17 @@
+package com.constructora.gutierrez.entities.CKeys;
+
+import java.io.Serializable;
+
+import com.constructora.gutierrez.entities.Obra;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Embeddable
+public class PersonalObraPK implements Serializable{
+
+    private String obra;
+    private String personalid;
+}
