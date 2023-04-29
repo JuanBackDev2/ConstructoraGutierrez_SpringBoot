@@ -33,7 +33,7 @@ public class ObraDTO {
 	
 	private String estado;
 	
-	private String terrenoId;
+	private String terrenoid;
 	
 	private String compradorId;
 }

@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -46,13 +48,12 @@ public class Obra {
 	@Column(name="estado")
 	private String estado;
 	
-	@Column(name="terrenoid")
-	private String terrenoId;
+	@ManyToOne
+	@JoinColumn(name="terrenoid")
+	private Terreno terrenoid;
 	
 	@Column(name="compradorid")
 	private String compradorId;
 	
-	//añadir las foreign keys
-	//eg: private Terreno terreno;
 	
 }
