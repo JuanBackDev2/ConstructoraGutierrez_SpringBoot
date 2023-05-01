@@ -27,4 +27,13 @@ public class ObraServiceImp implements ObraService{
 		return obrasDTO;
 	}
 
+	@Override
+	public ObraDTO obtenerObra(String id) {
+		Obra obra = obraRepository.findById(id);
+		
+		ObraDTO obraDTO = Helpers.modelmapper().map(obra, ObraDTO.class);
+		
+		return obraDTO;
+	}
+
 }

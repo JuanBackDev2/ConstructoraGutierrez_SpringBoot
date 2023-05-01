@@ -7,4 +7,5 @@ import com.constructora.gutierrez.entities.Obra;
 public interface ObraService {
 
 	public Page<ObraDTO> obtenerObras(Pageable pageable);
+	public ObraDTO obtenerObra(String id);
 }

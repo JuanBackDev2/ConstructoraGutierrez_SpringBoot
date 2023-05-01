@@ -7,4 +7,5 @@ public class PersonalObraDTO {
 	private int diasTrabajados;
 	private String obra;
 	private String personal;
+	
 }

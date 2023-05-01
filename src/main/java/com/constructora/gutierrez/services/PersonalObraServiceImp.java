@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.constructora.gutierrez.dtos.PersonalObraDTO;
 import com.constructora.gutierrez.entities.Obra;
+import com.constructora.gutierrez.entities.Personal;
 import com.constructora.gutierrez.entities.PersonalObra;
 import com.constructora.gutierrez.helpers.Helpers;
 import com.constructora.gutierrez.repositories.ObraRepository;
@@ -23,9 +24,6 @@ public class PersonalObraServiceImp implements PersonalObraService {
 	@Override
 	public Page<PersonalObraDTO> obtenerPersonalObra(Pageable pageable,String id) {
 		
-		/*
-		Page<PersonalObra> personalObra = PrRepository.findAll(pageable);
-		*/
 		Obra obra = obraRepository.findById(id);
 		
 		Page<PersonalObra> personalObra = PrRepository.findByObra(obra, pageable);
@@ -33,5 +31,6 @@ public class PersonalObraServiceImp implements PersonalObraService {
 		
 		return poDTO;
 	}
+	
 
 }

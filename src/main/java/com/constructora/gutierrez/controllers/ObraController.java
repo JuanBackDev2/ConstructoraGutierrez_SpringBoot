@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,9 +40,19 @@ public class ObraController {
 		
 	}
 	
+	
+	@GetMapping(path="/{id}")
+	public ResponseEntity obtenerObra(@PathVariable("id") String id) {
+		return new ResponseEntity(obraService.obtenerObra(id),HttpStatus.OK);
+		
+	}
+	
+	
 	@GetMapping(path="/personalObra/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public Page<PersonalObraDTO> obtenerPersonalObra(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue = "3") int size,@PathVariable String id){
 		Pageable paging = PageRequest.of(page, size);
 		return poService.obtenerPersonalObra(paging,id);
+		
 	}
+	
 }
