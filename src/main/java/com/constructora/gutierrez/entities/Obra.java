@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -55,8 +56,10 @@ public class Obra {
 	@JoinColumn(name="terrenoid")
 	private Terreno terrenoid;
 	
-	@Column(name="compradorid")
-	private String compradorId;
+	//@Column(name="compradorid")
+	@ManyToOne
+	@JoinColumn(name="compradorid")
+	private Comprador compradorId;
 	
 	@OneToMany(mappedBy = "obra",cascade = CascadeType.ALL)
 	List<PersonalObra> personalObra;

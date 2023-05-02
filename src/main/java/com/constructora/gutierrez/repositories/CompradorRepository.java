@@ -1,11 +1,11 @@
 package com.constructora.gutierrez.repositories;
+import com.constructora.gutierrez.entities.Comprador;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.constructora.gutierrez.entities.Terreno;
-
 @Repository
-public interface TerrenoRepository extends PagingAndSortingRepository<Terreno,String> {
-	public Terreno findById(String id);
+public interface CompradorRepository extends PagingAndSortingRepository<Comprador,String>{
+	
+	public Comprador findById(String id);
 }

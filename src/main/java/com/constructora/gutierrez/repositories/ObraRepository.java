@@ -8,4 +8,5 @@ import com.constructora.gutierrez.entities.Obra;
 @Repository
 public interface ObraRepository extends PagingAndSortingRepository<Obra,String> {
 	public Obra findById(String id);
+	public void save(Obra obra);
 }
