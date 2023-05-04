@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface CompradorRepository extends PagingAndSortingRepository<Comprador,String>{
 	
 	public Comprador findById(String id);
+	public boolean existsById(String id);
 }

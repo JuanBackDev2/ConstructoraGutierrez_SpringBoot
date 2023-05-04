@@ -26,4 +26,9 @@ public class TerrenoServiceImp implements TerrenoService{
 		return terrenosDTO;
 	}
 
+	@Override
+	public boolean existsById(String id) {
+		return terrenoRepository.existsById(id);
+	}
+
 }

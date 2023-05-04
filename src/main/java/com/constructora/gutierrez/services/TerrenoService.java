@@ -5,5 +5,6 @@ import org.springframework.data.domain.Pageable;
 import com.constructora.gutierrez.dtos.TerrenoDTO;
 public interface TerrenoService {
 
-	Page<TerrenoDTO> obtenerTerrenos(Pageable pageable);
+	public Page<TerrenoDTO> obtenerTerrenos(Pageable pageable);
+	public boolean existsById(String id);
 }

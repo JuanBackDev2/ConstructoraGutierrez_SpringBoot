@@ -1,6 +1,8 @@
 package com.constructora.gutierrez.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.constructora.gutierrez.dtos.PersonalDTO;
@@ -20,6 +22,13 @@ public class PersonalServiceImp implements PersonalService{
 		Personal personal = personaRepository.findById(id);
 		PersonalDTO personalDTO = Helpers.modelmapper().map(personal, PersonalDTO.class);
 		
+		return personalDTO;
+	}
+
+	@Override
+	public Page<PersonalDTO> findAll(Pageable pageable) {
+		Page<Personal> personal = personaRepository.findAll(pageable);
+		Page<PersonalDTO> personalDTO = Helpers.mapPage(personal, PersonalDTO.class);
 		return personalDTO;
 	}
 
