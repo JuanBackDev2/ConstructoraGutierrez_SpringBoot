@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.constructora.gutierrez.dtos.PersonalDTO;
+import com.constructora.gutierrez.dtos.PersonalObraDTO;
 import com.constructora.gutierrez.services.PersonalService;
 
 @RestController
@@ -37,6 +38,13 @@ public class PersonalController {
 	public ResponseEntity<PersonalDTO> obtenerPersonalPorId(@PathVariable("id")String id) {
 		
 		return new ResponseEntity<PersonalDTO>(ps.findById(id),HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(path="/obrasPersonal/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
+	public Page<PersonalObraDTO> obtenerObrasByPersonal(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue = "3") int size, @PathVariable("id") String id){
+		Pageable paging = PageRequest.of(page, size);
+		return (ps.obrasByPersonal(paging, id));
 		
 	}
 }

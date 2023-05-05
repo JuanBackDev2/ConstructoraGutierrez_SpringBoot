@@ -64,4 +64,11 @@ public class ObraController {
 		
 	}
 	
+	@PostMapping(path="/registrarPersonalObra/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity registrarPersonalObra(@RequestBody PersonalObraDTO poDTO, @PathVariable("id")String id) {
+		poService.registrarPersonalObra(poDTO, id);
+		return new ResponseEntity(HttpStatus.OK);
+		
+	}
+	
 }

@@ -10,4 +10,5 @@ import com.constructora.gutierrez.entities.PersonalObra;
 public interface PersonalObraService {
 
 	public Page<PersonalObraDTO> obtenerPersonalObra(Pageable pageable,String id);
+	public void registrarPersonalObra(PersonalObraDTO po,String obraId);
 }

@@ -16,5 +16,7 @@ import com.constructora.gutierrez.entities.CKeys.PersonalObraPK;
 public interface PersonalObraRepository extends PagingAndSortingRepository<PersonalObra,PersonalObraPK> {
 
 	public Page<PersonalObra> findByObra(Obra obra, Pageable pageable);
+	public Page<PersonalObra> findByPersonal(Personal personal, Pageable pageable);
+	public void save(PersonalObra po);
 	
 }
