@@ -12,4 +12,8 @@ public interface PersonalService {
 	public PersonalDTO findById(String id);
 	public Page<PersonalDTO> findAll(Pageable pageable);
 	public	Page<PersonalObraDTO> obrasByPersonal(Pageable pageable,String id);
+	public boolean existsById(String id);
+	public void registrarPersonal(PersonalDTO personalDTO);
+	public void eliminarPersonal(String id);
+	public void editarPersonal(String id,PersonalDTO personalDTO);
 }

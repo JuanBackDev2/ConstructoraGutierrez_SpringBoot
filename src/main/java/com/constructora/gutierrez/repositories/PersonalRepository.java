@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface PersonalRepository extends PagingAndSortingRepository<Personal,String> {
 
 	public Personal findById(String id);
+	public boolean existsById(String id);
+	public void save(Personal personal);
+	public void delete(Personal personal);
 }

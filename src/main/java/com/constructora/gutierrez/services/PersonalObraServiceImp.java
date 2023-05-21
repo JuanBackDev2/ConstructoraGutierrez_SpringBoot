@@ -52,11 +52,18 @@ public class PersonalObraServiceImp implements PersonalObraService {
 									  .id(pk)
 									  .diasTrabajados(po.getDiasTrabajados())
 									  .build());
-		//añadir 2 validaciones
-		//1. que no exista ya el PersonalObra
-		//2. que exista el personal
+
 		
-		//añadir registrar personal
+	}
+
+	@Override
+	public void eliminarPersonalObra(String obraId, String personalId) {
+		Obra obra = obraRepository.findById(obraId);
+		Personal personal = personalRepository.findById(personalId);
+		
+		PersonalObra po = PrRepository.findByObraAndPersonal(obra, personal);
+		PrRepository.delete(po);
+		
 	}
 	
 

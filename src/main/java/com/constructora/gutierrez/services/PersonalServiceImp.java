@@ -21,6 +21,9 @@ public class PersonalServiceImp implements PersonalService{
 	
 	@Autowired
 	PersonalObraRepository personalObraRepository;
+	
+	@Autowired
+	SalarioService salarioService;
 
 	@Override
 	public PersonalDTO findById(String id) {
@@ -44,6 +47,35 @@ public class PersonalServiceImp implements PersonalService{
 		Page<PersonalObra> obrasPersonal = personalObraRepository.findByPersonal(personal, pageable);
 		Page<PersonalObraDTO> obrasPersonalDTO = Helpers.mapPage(obrasPersonal, PersonalObraDTO.class);
 		return obrasPersonalDTO;
+	}
+
+	@Override
+	public boolean existsById(String id) {
+		return personaRepository.existsById(id);
+	}
+
+	@Override
+	public void registrarPersonal(PersonalDTO personalDTO) {
+		Personal personal = Helpers.modelmapper().map(personalDTO, Personal.class);
+		personaRepository.save(personal);
+		salarioService.registrarSalario(personalDTO);
+	}
+
+	@Override
+	public void eliminarPersonal(String id) {
+		Personal personal = personaRepository.findById(id);
+		personaRepository.delete(personal);
+		
+	}
+
+	@Override
+	public void editarPersonal(String id, PersonalDTO personalDTO) {
+		Personal personal = personaRepository.findById(id);
+		personal.setNombre(personalDTO.getNombre());
+		personal.setApellido(personalDTO.getApellido());
+		personal.setCargo(personalDTO.getCargo());
+		
+		personaRepository.save(personal);
 	}
 
 }

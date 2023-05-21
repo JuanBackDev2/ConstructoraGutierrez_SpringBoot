@@ -18,5 +18,7 @@ public interface PersonalObraRepository extends PagingAndSortingRepository<Perso
 	public Page<PersonalObra> findByObra(Obra obra, Pageable pageable);
 	public Page<PersonalObra> findByPersonal(Personal personal, Pageable pageable);
 	public void save(PersonalObra po);
+	public PersonalObra findByObraAndPersonal(Obra obra, Personal personal);
+	public void delete(PersonalObra personalObra);
 	
 }

@@ -9,4 +9,8 @@ public interface ObraService {
 	public Page<ObraDTO> obtenerObras(Pageable pageable);
 	public ObraDTO obtenerObra(String id);
 	public void registrarObra(ObraDTO obraDTO);
+	public void eliminarObra(String id);
+	public void editarObra(String id,ObraDTO obraDTO);
+	public boolean existsById(String id);
+	
 }

@@ -9,4 +9,6 @@ import com.constructora.gutierrez.entities.Obra;
 public interface ObraRepository extends PagingAndSortingRepository<Obra,String> {
 	public Obra findById(String id);
 	public void save(Obra obra);
+	public void delete(Obra obra);
+	public boolean existsById(String id);
 }

@@ -66,4 +66,38 @@ public class ObraServiceImp implements ObraService{
 		
 	}
 
+	@Override
+	public void eliminarObra(String id) {
+		Obra obra = obraRepository.findById(id);
+		obraRepository.delete(obra);
+	}
+
+	@Override
+	public void editarObra(String id, ObraDTO obraDTO) {
+		Obra obra = obraRepository.findById(id);
+		Terreno terreno = terrenoRepository.findById(obraDTO.getTerrenoid());
+		Comprador comprador = compradorRepository.findById(obraDTO.getCompradorId());
+		
+		obra.setAnioInicioObra(obraDTO.getAnioInicioObra());
+		obra.setAnioFinObra(obraDTO.getAnioFinObra());
+		obra.setTerrenoid(terreno);
+		obra.setCompradorId(comprador);
+		obra.setInversion(obraDTO.getInversion());
+		obra.setEstrato(obra.getEstrato());
+		obra.setLinderos(obraDTO.getLinderos());
+		obra.setNombre(obraDTO.getNombre());
+		obra.setTamano(obraDTO.getTamano());
+		obra.setUbicacion(obraDTO.getUbicacion());
+		
+		obraRepository.save(obra);
+		
+	}
+
+	@Override
+	public boolean existsById(String id) {
+		return obraRepository.existsById(id);
+	}
+
+	
+
 }

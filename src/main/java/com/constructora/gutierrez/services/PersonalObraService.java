@@ -11,4 +11,5 @@ public interface PersonalObraService {
 
 	public Page<PersonalObraDTO> obtenerPersonalObra(Pageable pageable,String id);
 	public void registrarPersonalObra(PersonalObraDTO po,String obraId);
+	public void eliminarPersonalObra(String obraId, String personalId);
 }

@@ -8,14 +8,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.constructora.gutierrez.dtos.MensajeDTO;
 import com.constructora.gutierrez.dtos.ObraDTO;
 import com.constructora.gutierrez.dtos.PersonalObraDTO;
 import com.constructora.gutierrez.entities.Obra;
@@ -71,4 +74,30 @@ public class ObraController {
 		
 	}
 	
+	@DeleteMapping(path="/eliminarPersonalObra/{obraId}/{personalId}")
+	public ResponseEntity eliminarPersonalObra(@PathVariable("obraId") String obraId, @PathVariable("personalId") String personalId) {
+		poService.eliminarPersonalObra(obraId, personalId);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@DeleteMapping(path="/borrarObra/{id}")
+	public ResponseEntity eliminarObra(@PathVariable("id") String id) {
+		obraService.eliminarObra(id);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@PutMapping(path="/editarObra/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity editarObra(@PathVariable("id") String id,@RequestBody ObraDTO obraDTO) {
+		obraService.editarObra(id, obraDTO);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping(path="/existsById/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity existsById (@PathVariable("id") String id) {
+		if(obraService.existsById(id)) {
+			return new ResponseEntity(MensajeDTO.builder().mensaje("V").build(),HttpStatus.OK);
+		}
+		return new ResponseEntity(MensajeDTO.builder().mensaje("F").build(),HttpStatus.OK);
+		
+	}
 }
