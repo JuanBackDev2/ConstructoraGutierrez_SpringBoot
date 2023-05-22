@@ -46,4 +46,10 @@ public class SalarioServiceImp implements SalarioService{
 		salarioRepository.save(salario);
 	}
 
+	@Override
+	public double findSalario(String personalId) {
+		Salario salario = salarioRepository.findByPersonalid(personalId);
+		return salario.getSalariobase()* salario.getPorcentajeincremento();
+	}
+
 }

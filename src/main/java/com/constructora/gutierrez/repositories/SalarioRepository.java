@@ -7,4 +7,5 @@ import com.constructora.gutierrez.entities.Salario;
 @Repository
 public interface SalarioRepository extends PagingAndSortingRepository<Salario,String> {
 	public void save(Salario salario);
+	public Salario findByPersonalid(String id);
 }
