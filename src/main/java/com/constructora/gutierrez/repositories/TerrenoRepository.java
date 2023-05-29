@@ -9,4 +9,7 @@ import com.constructora.gutierrez.entities.Terreno;
 public interface TerrenoRepository extends PagingAndSortingRepository<Terreno,String> {
 	public Terreno findById(String id);
 	public boolean existsById(String id);
+	public void save(Terreno terreno);
+	public void delete(Terreno terreno);
+
 }

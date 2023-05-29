@@ -23,7 +23,7 @@ public class Helpers {
 	}
 	
 	
-	public static <S, T> Page<T> mapPage(Page<S> source, Class<T> targetClass) {
+	public static <S, T> Page<T> mapPage(Page<S> source, Class<T>  targetClass) {
 	    List<T> targetList = source.getContent()
 	        .stream()
 	        .map(element -> Helpers.modelmapper().map(element, targetClass))
@@ -31,5 +31,4 @@ public class Helpers {
 
 	    return new PageImpl<>(targetList, source.getPageable(), source.getTotalElements());
 	}
-	
 }

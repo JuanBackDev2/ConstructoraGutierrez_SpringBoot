@@ -66,4 +66,10 @@ public class Obra {
 	
 	@OneToMany(mappedBy = "obra",cascade = CascadeType.ALL)
 	List<PersonalObra> personalObra;
+	
+	@OneToMany(mappedBy = "obra",cascade = CascadeType.ALL)
+	List<PlanoObra> planoObra;
+	
+	@OneToMany(mappedBy = "obraId",cascade = CascadeType.ALL)
+	List<FacturaObra> facturasObra;
 }

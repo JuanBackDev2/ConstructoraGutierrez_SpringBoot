@@ -18,14 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.constructora.gutierrez.dtos.FacturaObraDTO;
 import com.constructora.gutierrez.dtos.MensajeDTO;
 import com.constructora.gutierrez.dtos.ObraDTO;
 import com.constructora.gutierrez.dtos.PersonalObraDTO;
+import com.constructora.gutierrez.dtos.PlanoObraDTO;
 import com.constructora.gutierrez.entities.Obra;
 import com.constructora.gutierrez.entities.PersonalObra;
 import com.constructora.gutierrez.repositories.ObraRepository;
+import com.constructora.gutierrez.services.FacturaObraService;
 import com.constructora.gutierrez.services.ObraService;
 import com.constructora.gutierrez.services.PersonalObraService;
+import com.constructora.gutierrez.services.PlanoObraService;
 
 @RestController
 @RequestMapping("/obra")
@@ -37,6 +41,12 @@ public class ObraController {
 	
 	@Autowired
 	PersonalObraService poService;
+	
+	@Autowired
+	PlanoObraService planoObraService;
+	
+	@Autowired
+	FacturaObraService facturasService;
 
 	@GetMapping
 	public Page<ObraDTO> obtenerObras(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue = "3") int size){
@@ -60,6 +70,20 @@ public class ObraController {
 		
 	}
 	
+	@GetMapping(path="/facturasObra/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<FacturaObraDTO> obtenerFacturasObra(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue = "3") int size,@PathVariable String id){
+		Pageable paging = PageRequest.of(page, size);
+		return facturasService.obtenerFacturasObra(paging,id);
+		
+	}
+	
+	@GetMapping(path="/planosObra/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<PlanoObraDTO> obtenerPlanosObra(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue = "3") int size,@PathVariable String id){
+		Pageable paging = PageRequest.of(page, size);
+		return planoObraService.obtenerPlanoObra(paging,id);
+		
+	}
+	
 	@PostMapping(path="/registrarObra",consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity registrarObra(@RequestBody ObraDTO obraDTO) {
 		obraService.registrarObra(obraDTO);
@@ -74,9 +98,42 @@ public class ObraController {
 		
 	}
 	
+	@PostMapping(path="/registrarFacturaObra/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity registrarFacturaObra(@RequestBody FacturaObraDTO foDTO, @PathVariable("id")String id) {
+		facturasService.registrarFacturaObra(foDTO, id);
+		return new ResponseEntity(HttpStatus.OK);
+		
+	}
+	
+	@PostMapping(path="/pagoFacturaObra/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity pagoFacturaObra(@RequestBody FacturaObraDTO foDTO, @PathVariable("id")String id) {
+		facturasService.pagoFacturaObra(foDTO, id);
+		return new ResponseEntity(HttpStatus.OK);
+		
+	}
+	
+	@PostMapping(path="/registrarPlanoObra/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity registrarPlanoObra(@RequestBody PlanoObraDTO poDTO, @PathVariable("id")String id) {
+		planoObraService.registrarPlanoObra(poDTO, id);
+		return new ResponseEntity(HttpStatus.OK);
+		
+	}
+	
 	@DeleteMapping(path="/eliminarPersonalObra/{obraId}/{personalId}")
 	public ResponseEntity eliminarPersonalObra(@PathVariable("obraId") String obraId, @PathVariable("personalId") String personalId) {
 		poService.eliminarPersonalObra(obraId, personalId);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@DeleteMapping(path="/eliminarFactura/{facturaId}")
+	public ResponseEntity eliminarFacturaObra(@PathVariable("facturaId") String facturaId) {
+	facturasService.eliminarFacturaObra(facturaId);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@DeleteMapping(path="/eliminarPlanoObra/{obraId}/{planoId}")
+	public ResponseEntity eliminarPlanoObra(@PathVariable("obraId") String obraId, @PathVariable("planoId") String planoId) {
+		planoObraService.eliminarPlanoObra(obraId, planoId);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	

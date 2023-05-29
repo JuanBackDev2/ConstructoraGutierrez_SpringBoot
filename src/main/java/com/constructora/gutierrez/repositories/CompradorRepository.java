@@ -9,4 +9,6 @@ public interface CompradorRepository extends PagingAndSortingRepository<Comprado
 	
 	public Comprador findById(String id);
 	public boolean existsById(String id);
+	public void save(Comprador comprador);
+	public void delete(Comprador comprador);
 }
